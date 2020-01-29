@@ -14,7 +14,7 @@ class Tahminci {
     }
 
     mutate() {
-        this.brain.mutate(0.3);
+        this.brain.mutate(0.1);
     }
 
     // targetMac = [evSahibiOrani, BeraberlikOrani, RakipOrani, macSonu1-0-2]
@@ -31,6 +31,6 @@ class Tahminci {
         else if(output[1] > output[0]+0.12 && targetMac[3] == 2) this.score++;
         else if(targetMac[3] == 0) this.score++;
 
-        if(this.score == 10) noLoop();
+        if(this.score == targetMacSayisi) noLoop();
     }
 }
