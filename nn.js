@@ -58,4 +58,26 @@ class NeuralNetwork {
             this.model.setWeights(mutatedWeights);
         });
     }
+
+    copy() {
+        return tf.tidy(() => {
+            const modelCopy = this.createModel();
+            const weights = this.model.getWeights();
+            const weightCopies = [];
+            for (let i = 0; i < weights.length; i++) {
+                weightCopies[i] = weights[i].clone();
+            }
+            modelCopy.setWeights(weightCopies);
+            return new NeuralNetwork(
+                modelCopy,
+                this.input_nodes,
+                this.hidden_nodes,
+                this.output_nodes
+            );
+        });
+    }
+
+    dispose() {
+        this.model.dispose();
+    }
 }

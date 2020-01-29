@@ -24,11 +24,11 @@ function calculateFitness() {
 
 function nextGeneration() {
     calculateFitness();
-    for (let i = 0; i < TOTAL; i++) {
+    for (let i = 0; i < savedTahminciler.length; i++) {
         tahminciler[i] = pickOne();
     }
-    for (let i = 0; i < TOTAL; i++) {
-        savedTahminciler[i].dispose();
+    for (let j = 0; j < savedTahminciler.length; j++) {
+        savedTahminciler[j].dispose();
     }
     savedTahminciler = [];
 }

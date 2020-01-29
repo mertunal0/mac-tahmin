@@ -5,7 +5,7 @@ class Tahminci {
         if (brain) {
           this.brain = brain.copy();
         } else {
-          this.brain = new NeuralNetwork(3, 6, 1);
+          this.brain = new NeuralNetwork(3, 6, 2);
         }
     }
 
@@ -14,7 +14,7 @@ class Tahminci {
     }
 
     mutate() {
-        this.brain.mutate(0.1);
+        this.brain.mutate(0.3);
     }
 
     // targetMac = [evSahibiOrani, BeraberlikOrani, RakipOrani, macSonu1-0-2]
@@ -26,12 +26,11 @@ class Tahminci {
         inputs[2] = targetMac[2]
 
         let output = this.brain.predict(inputs)
+        //
+        if(output[0] > output[1]+0.12 && targetMac[3] == 1) this.score++;
+        else if(output[1] > output[0]+0.12 && targetMac[3] == 2) this.score++;
+        else if(targetMac[3] == 0) this.score++;
 
-        console.log(output[0])
-        // output değeri 0-0.4 arasındaysa ve maç 1 bitmişse, 0.4-0.6 arasındaysa ve maç 0 bitmişse,
-        // 0.6-1 arasındaysa ve maç 2 bitmişse doğru tahmin yaptığını kabul edip scoreunu arttırıyoruz.
-        if(output <= 0.4 && targetMac[3] == 1) this.score++;
-        else if(output <= 0.6 && targetMac[3] == 0) this.score++;
-        else if(output <= 1 && targetMac[3] == 2) this.score++;
+        if(this.score == 10) noLoop();
     }
 }

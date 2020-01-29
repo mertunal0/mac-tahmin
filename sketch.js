@@ -1,9 +1,7 @@
-/*jslint es6:true*/
-
 const TOTAL = 20;
 let tahminciler = [];
 let savedTahminciler = [];
-
+var counter = 0;
 let targetMaclar = [
   [1.10, 2.05, 2.50, 1],
   [1.30, 3.20, 3.50, 0],
@@ -43,18 +41,26 @@ function setup() {
 }
 
 function draw() {
-  for (let j = 0; j < TOTAL; j++) {
+  for (let j = 0; j < tahminciler.length; j++) {
     for(let targetMac of targetMaclar) {
       tahminciler[j].think(targetMac);
     }
-    savedTahminciler.push(tahminciler.splice(j, 1)[0]);
+    if(tahminciler[j].score > 8) {
+      console.log(tahminciler[j])
+    }
+    //savedTahminciler.push(tahminciler.splice(j, 1)[0]);
   }
+  savedTahminciler = tahminciler;
+  tahminciler = [];
   displayPhrases();
   nextGeneration();
+
+  counter++;
+  if(counter%10000 == 0) console.log(counter);
 }
 
 function displayPhrases() {
-  for(let i=0; i<TOTAL; i++) {
+  for(let i=0; i<savedTahminciler.length; i++) {
     scoresPhrases[i].html(savedTahminciler[i].score);
   }
 }
