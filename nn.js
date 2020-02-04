@@ -27,7 +27,8 @@ class NeuralNetwork {
         const hidden = tf.layers.dense({
             units: this.hidden_nodes,
             inputShape: [this.input_nodes],
-            activation: tf.layers.leakyRelU
+            activation: tf.layers.leakyRelU,
+            learningRate: "0.9"
         });
         model.add(hidden);
         const output = tf.layers.dense({
@@ -37,7 +38,6 @@ class NeuralNetwork {
         model.add(output);
         return model;
     }
-
     mutate(rate) {
         tf.tidy(() => {
             const weights = this.model.getWeights();

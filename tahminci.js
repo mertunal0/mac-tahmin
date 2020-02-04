@@ -5,7 +5,7 @@ class Tahminci {
         if (brain) {
           this.brain = brain.copy();
         } else {
-          this.brain = new NeuralNetwork(5, 8, 2);
+          this.brain = new NeuralNetwork(5, 6, 2);
         }
     }
 
@@ -13,8 +13,14 @@ class Tahminci {
         this.brain.dispose();
     }
 
+    saveBrain() {
+      console.log(this)
+      if (this.score == 50)
+        noLoop();
+    }
+
     mutate() {
-        this.brain.mutate(0.1);
+        this.brain.mutate(0.3);
     }
 
     // targetMac = [evSahibiOrani, BeraberlikOrani, RakipOrani, macSonu1-0-2]
@@ -37,7 +43,5 @@ class Tahminci {
         if(output[0] > output[1]+0.12 && targetMac[10] == 1) this.score++;
         else if(output[1] > output[0]+0.12 && targetMac[10] == 2) this.score++;
         else if(targetMac[3] == 0) this.score++;
-
-        if(this.score == targetMacSayisi) noLoop();
     }
 }
